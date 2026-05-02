@@ -1,0 +1,146 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "ravi",
+      "password": "worker123",
+      "role": "worker",
+      "name": "Ravi Kumar"
+    },
+    {
+      "id": 2,
+      "username": "anita",
+      "password": "manager123",
+      "role": "manager",
+      "name": "Anita Sharma"
+    },
+    {
+      "id": 3,
+      "username": "vikram",
+      "password": "driver123",
+      "role": "driver",
+      "name": "Vikram Singh"
+    },
+    {
+      "id": 4,
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "name": "System Admin"
+    }
+  ],
+  "inventory": [
+    {
+      "item": "A12",
+      "location": "Shelf 4",
+      "quantity": 45,
+      "status": "available"
+    },
+    {
+      "item": "B45",
+      "location": "Rack 2",
+      "quantity": 23,
+      "status": "available"
+    },
+    {
+      "item": "C78",
+      "location": "Bay 1",
+      "quantity": 12,
+      "status": "low_stock"
+    },
+    {
+      "item": "D91",
+      "location": "Zone 3",
+      "quantity": 67,
+      "status": "available"
+    },
+    {
+      "item": "E34",
+      "location": "Shelf 8",
+      "quantity": 5,
+      "status": "critical"
+    }
+  ],
+  "shipments": [
+    {
+      "id": "SH001",
+      "status": "in_transit",
+      "driver": "Vikram Singh",
+      "destination": "Mumbai Warehouse",
+      "eta": "2026-05-02T18:00:00"
+    },
+    {
+      "id": "SH002",
+      "status": "delayed",
+      "driver": "Vikram Singh",
+      "destination": "Delhi Hub",
+      "eta": "2026-05-03T10:00:00",
+      "reason": "Traffic delay"
+    },
+    {
+      "id": "SH003",
+      "status": "delivered",
+      "driver": "Vikram Singh",
+      "destination": "Bangalore Center",
+      "eta": "2026-05-01T15:00:00"
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "timestamp": "2026-05-02T09:15:00",
+      "user": "Ravi Kumar",
+      "role": "worker",
+      "action": "LOCATE_ITEM",
+      "details": "Located item A12 at Shelf 4",
+      "voiceInput": "Hello Ira, locate item A12"
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-05-02T10:30:00",
+      "user": "Vikram Singh",
+      "role": "driver",
+      "action": "DELAY_UPDATE",
+      "details": "Shipment SH002 delayed due to traffic",
+      "voiceInput": "Hello Ira, shipment delayed due to traffic"
+    },
+    {
+      "id": 3,
+      "timestamp": "2026-05-02T11:45:00",
+      "user": "Ravi Kumar",
+      "role": "worker",
+      "action": "REPORT_HAZARD",
+      "details": "Spill reported near dock area",
+      "voiceInput": "Hello Ira, spill near dock"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "type": "hazard",
+      "severity": "high",
+      "message": "Spill near dock area",
+      "timestamp": "2026-05-02T11:45:00",
+      "status": "active",
+      "reportedBy": "Ravi Kumar"
+    },
+    {
+      "id": 2,
+      "type": "inventory",
+      "severity": "critical",
+      "message": "Item E34 critically low (5 units)",
+      "timestamp": "2026-05-02T08:00:00",
+      "status": "active",
+      "reportedBy": "System"
+    },
+    {
+      "id": 3,
+      "type": "shipment",
+      "severity": "medium",
+      "message": "Shipment SH002 delayed",
+      "timestamp": "2026-05-02T10:30:00",
+      "status": "acknowledged",
+      "reportedBy": "Vikram Singh"
+    }
+  ]
+}
