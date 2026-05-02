@@ -73,16 +73,15 @@ export function VoiceDashboard({ user, onNavigate, onLogUpdate }: VoiceDashboard
     };
   }, []);
 
-  const processVoiceCommand = (text: string) => {
+    const processVoiceCommand = async (text: string) => {
     setStatus('processing');
-
     const lowerText = text.toLowerCase();
 
     if (!lowerText.includes('hello ira')) {
       setAnalysis({
         detectedText: text,
         intent: 'NO_WAKE_WORD',
-        action: 'Ignored - wake word not detected',
+        action: 'Wake word missing',
         response: 'Please say "Hello Ira" first'
       });
       setStatus('idle');
@@ -90,21 +89,54 @@ export function VoiceDashboard({ user, onNavigate, onLogUpdate }: VoiceDashboard
     }
 
     const command = lowerText.replace('hello ira', '').trim();
-    const result = analyzeIntent(command);
-    setAnalysis(result);
 
-    const log = {
-      id: Date.now(),
-      timestamp: new Date().toISOString(),
-      user: user.name,
-      role: user.role,
-      action: result.intent,
-      details: result.response,
-      voiceInput: text
-    };
-    onLogUpdate(log);
+    try {
+      const res = await fetch('http://localhost:8000/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: command })
+      });
 
-    speak(result.response);
+      if (!res.ok) throw new Error('Backend error');
+
+      const data = await res.json();
+
+      const result = {
+        detectedText: command,
+        intent: data.intent || 'UNKNOWN',
+        action: `Gemini → ${data.intent}`,
+        response: data.response || "Got it!"
+      };
+
+      setAnalysis(result);
+
+      // Log it
+      const log = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        user: user.name,
+        role: user.role,
+        action: result.intent,
+        details: result.response,
+        voiceInput: text
+      };
+      onLogUpdate(log);
+
+      speak(result.response);
+
+    } catch (err) {
+      console.error(err);
+      const fallback = "Sorry, I'm having trouble connecting right now.";
+      setAnalysis({
+        detectedText: command,
+        intent: 'ERROR',
+        action: 'Connection failed',
+        response: fallback
+      });
+      speak(fallback);
+    }
+
+    setStatus('idle');
   };
 
   const analyzeIntent = (command: string): AnalysisResult => {
