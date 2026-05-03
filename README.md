@@ -81,6 +81,7 @@ The system uses a **Tool-Use (Agentic)** pattern. When a voice command is receiv
 <img width="439" height="851" alt="image" src="https://github.com/user-attachments/assets/f6c295a8-d758-4bde-a3c4-c09e9f33114b" />
 <img width="439" height="850" alt="image" src="https://github.com/user-attachments/assets/42ffcdec-89da-4eed-bf8e-5b70b2cbd918" />
 <img width="437" height="845" alt="image" src="https://github.com/user-attachments/assets/efe8d978-c35a-4f9f-98d3-328e4e8b6388" />
-
+<img width="435" height="846" alt="image" src="https://github.com/user-attachments/assets/4cc8507b-cbec-4400-a411-c0ff385ada08" />
+<img width="438" height="845" alt="image" src="https://github.com/user-attachments/assets/0f7907aa-4ee1-4654-a853-0fc6259e6c5e" />
 
   
