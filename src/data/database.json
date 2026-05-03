@@ -31,31 +31,31 @@
   ],
   "inventory": [
     {
-      "item": "A12",
+      "item": "1001",
       "location": "Shelf 4",
-      "quantity": 45,
+      "quantity": 33.0,
       "status": "available"
     },
     {
-      "item": "B45",
+      "item": "1002",
       "location": "Rack 2",
       "quantity": 23,
       "status": "available"
     },
     {
-      "item": "C78",
+      "item": "1003",
       "location": "Bay 1",
       "quantity": 12,
       "status": "low_stock"
     },
     {
-      "item": "D91",
+      "item": "1004",
       "location": "Zone 3",
       "quantity": 67,
       "status": "available"
     },
     {
-      "item": "E34",
+      "item": "1005",
       "location": "Shelf 8",
       "quantity": 5,
       "status": "critical"
@@ -92,8 +92,8 @@
       "user": "Ravi Kumar",
       "role": "worker",
       "action": "LOCATE_ITEM",
-      "details": "Located item A12 at Shelf 4",
-      "voiceInput": "Hello Ira, locate item A12"
+      "details": "Located item 1001 at Shelf 4",
+      "voiceInput": "Hello Ira, locate item 1001"
     },
     {
       "id": 2,
@@ -112,6 +112,15 @@
       "action": "REPORT_HAZARD",
       "details": "Spill reported near dock area",
       "voiceInput": "Hello Ira, spill near dock"
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-05-03T09:43:05.748096",
+      "user": "Anita Sharma",
+      "role": "manager",
+      "action": "TRANSFER_ITEM",
+      "details": "12 units of item code 1001 have been successfully removed, leaving 33 units in stock at Shelf 4.",
+      "voiceInput": ", remove 12 pieces from code number 1001."
     }
   ],
   "alerts": [
@@ -128,7 +137,7 @@
       "id": 2,
       "type": "inventory",
       "severity": "critical",
-      "message": "Item E34 critically low (5 units)",
+      "message": "Item 1005 critically low (5 units)",
       "timestamp": "2026-05-02T08:00:00",
       "status": "active",
       "reportedBy": "System"

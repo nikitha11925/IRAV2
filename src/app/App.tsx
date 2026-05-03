@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Login } from './components/Login';
 import { VoiceDashboard } from './components/VoiceDashboard';
 import { Menu } from './components/Menu';
@@ -6,7 +6,7 @@ import { Logs } from './components/Logs';
 import { Inventory } from './components/Inventory';
 import { Alerts } from './components/Alerts';
 import { Users } from './components/Users';
-import database from '../data/database.json';
+import  database  from '../data/database.json';
 
 type Screen = 'login' | 'voice' | 'menu' | 'logs' | 'inventory' | 'alerts' | 'users';
 
@@ -38,7 +38,7 @@ export default function App() {
   }
 
   return (
-    <div className="size-full">
+    <div className="size-full bg-background text-foreground transition-colors duration-500">
       {currentScreen === 'voice' && (
         <VoiceDashboard
           user={currentUser}
@@ -54,7 +54,11 @@ export default function App() {
         />
       )}
       {currentScreen === 'logs' && (
-        <Logs logs={logs} onNavigate={handleNavigate} />
+        <Logs 
+          logs={logs} 
+          user={currentUser} 
+          onNavigate={handleNavigate} 
+        />
       )}
       {currentScreen === 'inventory' && (
         <Inventory onNavigate={handleNavigate} />
