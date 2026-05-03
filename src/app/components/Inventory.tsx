@@ -8,10 +8,10 @@ interface InventoryProps {
 export function Inventory({ onNavigate }: InventoryProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'available': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'low_stock': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'critical': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
+      case 'available': return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+      case 'low_stock': return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+      case 'critical': return 'bg-destructive/10 text-destructive border-destructive/20';
+      default: return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -25,44 +25,54 @@ export function Inventory({ onNavigate }: InventoryProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
-      <div className="bg-slate-900 p-4 border-b border-slate-800">
-        <div className="flex items-center gap-3">
-          <button onClick={() => onNavigate('menu')} className="text-slate-400 hover:text-white">
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <div>
-            <h1 className="text-xl font-bold text-blue-400">Inventory</h1>
-            <p className="text-sm text-slate-400">{database.inventory.length} items</p>
-          </div>
+    <div className="min-h-screen bg-background flex flex-col transition-colors duration-500">
+      
+      {/* Sticky Matte Glass Header */}
+      <div className="matte-glass sticky top-0 z-10 p-4 md:px-6 border-b border-border flex items-center gap-4">
+        <button 
+          onClick={() => onNavigate('menu')} 
+          className="p-2 rounded-full hover:bg-accent text-muted-foreground hover:text-accent-foreground transition-all duration-300 active:scale-90 bg-muted/50 border border-transparent hover:border-border"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        <div>
+          <h1 className="text-xl font-bold text-primary tracking-tight">Inventory Database</h1>
+          <p className="text-sm text-muted-foreground font-medium">{database.inventory.length} items tracked</p>
         </div>
       </div>
 
-      <div className="flex-1 p-4 overflow-auto">
-        <div className="grid gap-3">
-          {database.inventory.map((item) => (
-            <div key={item.item} className="bg-slate-900 rounded-lg p-4 border border-slate-800">
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="bg-blue-500/20 rounded-lg p-2">
-                    <Package className="w-5 h-5 text-blue-400" />
+      <div className="flex-1 p-4 md:p-6 overflow-auto">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {database.inventory.map((item, index) => (
+            <div 
+              key={item.item} 
+              className="bg-background rounded-2xl p-5 border border-border shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 hover:scale-[1.02] animate-in slide-in-from-bottom-6 fade-in"
+              style={{ 
+                animationFillMode: 'both', 
+                animationDelay: `${index * 75}ms` 
+              }}
+            >
+              <div className="flex items-start justify-between mb-5">
+                <div className="flex items-center gap-4">
+                  <div className="bg-primary/10 rounded-xl p-3">
+                    <Package className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">{item.item}</h3>
-                    <div className="flex items-center gap-1 text-sm text-slate-400">
-                      <MapPin className="w-3 h-3" />
+                    <h3 className="text-xl font-bold text-foreground">{item.item}</h3>
+                    <div className="flex items-center gap-1.5 text-sm text-muted-foreground font-medium mt-0.5">
+                      <MapPin className="w-4 h-4" />
                       <span>{item.location}</span>
                     </div>
                   </div>
                 </div>
-                <span className={`px-2 py-1 rounded text-xs border ${getStatusColor(item.status)}`}>
+                <span className={`px-3 py-1 rounded-lg text-xs font-bold border ${getStatusColor(item.status)}`}>
                   {getStatusLabel(item.status)}
                 </span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-slate-500">Quantity</span>
-                <span className="text-lg font-bold text-white">{item.quantity}</span>
+              <div className="pt-4 border-t border-border flex items-center justify-between">
+                <span className="text-sm font-medium text-muted-foreground">Quantity in Stock</span>
+                <span className="text-2xl font-black text-foreground">{item.quantity}</span>
               </div>
             </div>
           ))}

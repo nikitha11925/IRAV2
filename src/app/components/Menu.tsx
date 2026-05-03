@@ -1,4 +1,4 @@
-import { X, Mic, FileText, Package, AlertTriangle, Users, LogOut } from 'lucide-react';
+import { X, Mic, FileText, Package, AlertTriangle, Users, LogOut, ChevronRight } from 'lucide-react';
 
 interface MenuProps {
   user: any;
@@ -18,43 +18,63 @@ export function Menu({ user, onNavigate, onLogout }: MenuProps) {
   const availableItems = menuItems.filter(item => item.roles.includes(user.role));
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
-      <div className="bg-slate-900 p-4 border-b border-slate-800">
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 md:p-8 transition-colors duration-500">
+      
+      {/* Central Matte Glass Hub */}
+      <div className="w-full max-w-2xl matte-glass rounded-[2rem] p-6 md:p-10 animate-in fade-in zoom-in-95 duration-500 ease-out shadow-xl shadow-primary/5">
+        
+        <div className="flex items-center justify-between mb-8 pb-6 border-b border-border">
           <div>
-            <h1 className="text-xl font-bold text-blue-400">Menu</h1>
-            <p className="text-sm text-slate-400">{user.name} • {user.role}</p>
+            <h1 className="text-3xl font-bold text-primary tracking-tight">System Menu</h1>
+            <p className="text-muted-foreground font-medium mt-1">
+              {user.name} <span className="mx-2 opacity-50">•</span> <span className="capitalize">{user.role}</span>
+            </p>
           </div>
           <button
             onClick={() => onNavigate('voice')}
-            className="text-slate-400 hover:text-white"
+            className="p-3 rounded-full hover:bg-accent hover:text-accent-foreground text-muted-foreground transition-all duration-300 active:scale-90 bg-muted/50 border border-transparent hover:border-border"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
-      </div>
 
-      <div className="flex-1 p-4">
-        <div className="space-y-2">
-          {availableItems.map(item => (
-            <button
-              key={item.id}
-              onClick={() => onNavigate(item.id)}
-              className="w-full bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg p-4 flex items-center gap-4 transition-colors"
-            >
-              <item.icon className="w-6 h-6 text-blue-400" />
-              <span className="text-white">{item.label}</span>
-            </button>
-          ))}
+        <div className="flex-1">
+          <div className="grid gap-4">
+            {availableItems.map((item, index) => (
+              <button
+                key={item.id}
+                onClick={() => onNavigate(item.id)}
+                className="group w-full bg-background hover:bg-primary/5 border border-border rounded-2xl p-4 md:p-5 flex items-center gap-5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:border-primary/30 hover:shadow-md animate-in slide-in-from-bottom-6 fade-in"
+                style={{ 
+                  animationFillMode: 'both', 
+                  animationDelay: `${index * 75}ms` 
+                }}
+              >
+                <div className="bg-primary/10 p-3 rounded-xl group-hover:scale-110 group-hover:bg-primary transition-all duration-300">
+                  <item.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                </div>
+                
+                <span className="text-foreground font-semibold text-lg">{item.label}</span>
+                
+                <ChevronRight className="w-5 h-5 text-muted-foreground ml-auto group-hover:text-primary group-hover:translate-x-1 transition-all" />
+              </button>
+            ))}
+          </div>
+
+          {/* Logout Button */}
+          <button
+            onClick={onLogout}
+            className="w-full mt-10 bg-destructive/10 hover:bg-destructive text-destructive hover:text-destructive-foreground rounded-2xl p-5 flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-bold shadow-sm animate-in slide-in-from-bottom-6 fade-in"
+            style={{ 
+              animationFillMode: 'both', 
+              animationDelay: `${availableItems.length * 75 + 100}ms` 
+            }}
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Secure Logout</span>
+          </button>
         </div>
 
-        <button
-          onClick={onLogout}
-          className="w-full mt-8 bg-red-600/20 hover:bg-red-600/30 border border-red-600/50 rounded-lg p-4 flex items-center justify-center gap-3 transition-colors"
-        >
-          <LogOut className="w-5 h-5 text-red-400" />
-          <span className="text-red-400">Logout</span>
-        </button>
       </div>
     </div>
   );

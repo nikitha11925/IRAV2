@@ -31,85 +31,81 @@ export function Login({ onLogin }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 transition-colors duration-500">
+      {/* Added animate-in for a smooth entrance */}
+      <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-700 ease-out">
+        
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-400 mb-2">IRA Logistics</h1>
-          <p className="text-slate-400">Voice-First Warehouse System</p>
+          <h1 className="text-4xl font-bold text-primary mb-2 tracking-tight">IRA Logistics</h1>
+          <p className="text-muted-foreground font-medium">Voice-First Warehouse System</p>
         </div>
 
-        <div className="bg-slate-900 rounded-lg p-6 shadow-xl border border-slate-800">
-          <form onSubmit={handleLogin} className="space-y-4">
+        {/* Applied our new matte-glass utility here */}
+        <div className="matte-glass rounded-2xl p-8">
+          <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-sm text-slate-400 mb-2">Username</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Username</label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-slate-800 text-white rounded-lg px-4 py-3 border border-slate-700 focus:border-blue-500 focus:outline-none"
+                className="w-full bg-input-background text-foreground rounded-xl px-4 py-3 border border-border focus:border-primary focus:ring-[3px] focus:ring-primary/30 focus:outline-none transition-all"
                 placeholder="Enter username"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-slate-400 mb-2">Password</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-slate-800 text-white rounded-lg px-4 py-3 border border-slate-700 focus:border-blue-500 focus:outline-none"
+                className="w-full bg-input-background text-foreground rounded-xl px-4 py-3 border border-border focus:border-primary focus:ring-[3px] focus:ring-primary/30 focus:outline-none transition-all"
                 placeholder="Enter password"
               />
             </div>
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-3 text-red-400 text-sm">
+              <div className="bg-destructive/10 border border-destructive/30 rounded-xl p-3 text-destructive-foreground text-sm font-medium animate-in slide-in-from-top-2">
                 {error}
               </div>
             )}
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-3 font-medium transition-colors"
+              className="w-full bg-primary text-primary-foreground hover:scale-[1.02] active:scale-[0.98] rounded-xl px-4 py-3 font-semibold shadow-sm transition-all duration-300"
             >
               Login
             </button>
           </form>
 
-          <div className="mt-6">
-            <p className="text-sm text-slate-500 text-center mb-3">Quick Login</p>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => quickLogin('worker')}
-                className="bg-slate-800 hover:bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-700 transition-colors"
-              >
-                Worker
-              </button>
-              <button
-                onClick={() => quickLogin('manager')}
-                className="bg-slate-800 hover:bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-700 transition-colors"
-              >
-                Manager
-              </button>
-              <button
-                onClick={() => quickLogin('driver')}
-                className="bg-slate-800 hover:bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-700 transition-colors"
-              >
-                Driver
-              </button>
-              <button
-                onClick={() => quickLogin('admin')}
-                className="bg-slate-800 hover:bg-slate-700 text-white rounded-lg px-3 py-2 text-sm border border-slate-700 transition-colors"
-              >
-                Admin
-              </button>
+          <div className="mt-8">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-border"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 text-muted-foreground bg-white dark:bg-[#1a1a1a]">Quick Login</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-3 mt-5">
+              {['worker', 'manager', 'driver', 'admin'].map((role) => (
+                <button
+                  key={role}
+                  onClick={() => quickLogin(role)}
+                  className="bg-muted hover:bg-accent hover:text-accent-foreground text-foreground rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] capitalize"
+                >
+                  {role}
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-6 text-center text-sm text-slate-500">
+        <div className="mt-8 text-center text-sm text-muted-foreground/70 font-medium">
           <p>Demo Credentials:</p>
-          <p>ravi/worker123 • anita/manager123</p>
+          <p className="mt-1">ravi/worker123 • anita/manager123</p>
           <p>vikram/driver123 • admin/admin123</p>
         </div>
       </div>

@@ -1,3 +1,41 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+/* -------------------------------------------------------------------------- */
+/* Global Utilities & Pastel Tech Customizations                              */
+/* -------------------------------------------------------------------------- */
+
+/* Enable fluid smooth scrolling for the entire application */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Webkit Scrollbar to match the new aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted); /* Soft light grey track */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db; /* Soft grey thumb */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary); /* Pastel orange on hover! */
+}
+
+/* Prevent text highlighting where it isn't needed for a more app-like feel */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
